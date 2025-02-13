@@ -56,3 +56,29 @@ graph TD;
     
     C5 -->|Código Nativo| D[Execução no Sistema Operacional];
 
+```
+
+Tipos
+Todos os tipos por valor são structs: Isso inclui os tipos primitivos como int, float, double, bool, char, além de estruturas (struct) definidas pelo usuário.
+Eles herdam de `System.ValueType`: Isso ocorre implicitamente, ou seja, quando você define uma struct, internamente ela já está herdando de System.ValueType, que por sua vez deriva de System.Object.
+
+```c#
+int numero = 10; // int é um Value Type, que é um struct
+Console.WriteLine(numero.GetType()); // Saída: System.Int32
+
+
+```
+
+```
+System.Object
+   └── System.ValueType
+         ├── System.Int32 (int)
+         ├── System.Double (double)
+         ├── System.Boolean (bool)
+         ├── System.Char (char)
+         ├── System.DateTime
+         └── MinhasStructsPersonalizadas
+
+
+```
+
