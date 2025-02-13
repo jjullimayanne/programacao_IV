@@ -82,3 +82,53 @@ System.Object
 
 ```
 
+No .NET, System.Object (ou apenas object) é a classe base de todos os tipos. Isso significa que todas as classes e tipos de referência derivam, direta ou indiretamente, dela.
+
+Diferente dos Value Types (tipos por valor, como int, struct, bool), os Reference Types (objetos, class, string, array) são armazenados no heap e acessados por referência.
+
+```mermaid
+graph TD;
+    subgraph Stack Memory
+        mainFunction["main()"]
+        p1["p1 (reference) ➝ obj1"]
+        p2["p2 (reference) ➝ obj1"]
+        x["x = 10 (Value Type)"]
+        y["y = x (copy of x)"]
+    end
+
+    subgraph Heap Memory
+        obj1["obj1 { Nome: 'Carlos' }"]
+    end
+
+    p1 -->|Reference| obj1
+    p2 -->|Reference| obj1
+    y -->|Copy of x| x
+
+
+
+```
+O que acontece quando usamos new?
+Quando você cria um objeto com new, o .NET faz o seguinte:
+
+- Aloca um espaço na memória heap para armazenar o objeto.
+- Inicializa os valores dos membros (com valores padrão se não forem especificados).
+- Retorna uma referência para o objeto criado na heap.
+- Essa referência é armazenada na stack, para que o programa possa acessar o objeto.
+
+```c#
+class Pessoa
+{
+    public string Nome;
+}
+
+Pessoa p1 = new Pessoa(); // Aloca um novo objeto no heap
+p1.Nome = "Carlos";
+
+Pessoa p2 = new Pessoa(); // Aloca um NOVO objeto no heap
+p2.Nome = "Ana";
+
+Console.WriteLine(p1.Nome); // Carlos
+Console.WriteLine(p2.Nome); // Ana
+
+
+```
